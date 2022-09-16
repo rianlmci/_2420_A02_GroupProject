@@ -151,6 +151,7 @@ public class CircularQueueB<Item> implements Iterable<Item> {
             return nextItem;
         }
     }
+    /*
     //= = = TEST CLIENT = = =//
     public static void main(String[] args){
         CircularQueueB<String> numberQueue = new CircularQueueB<>(3);
@@ -178,6 +179,7 @@ public class CircularQueueB<Item> implements Iterable<Item> {
         System.out.println("Current size of nodes: " + numberQueue.size + "\n");
         System.out.println("Current capacity of nodes: " + numberQueue.capacity + "\n");
     }
+     */
 }
 
 
