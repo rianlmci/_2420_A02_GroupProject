@@ -133,4 +133,21 @@ class CircularQueueATest {
     void testToString_FullQueue() {
         assertEquals("this is queue a's test ", stringQueue.toString());
     }
+
+    @Test
+    void testToString_enqueueAndDequeue() {
+        CircularQueueA<String> queue = new CircularQueueA<>(5);
+        queue.enqueue("Test0");
+        queue.enqueue("Test1");
+        queue.enqueue("Test2");
+        queue.enqueue("Test3");
+        queue.enqueue("Test4");
+        queue.dequeue();
+        queue.dequeue();
+        queue.dequeue();
+        queue.enqueue("Test5");
+        queue.enqueue("Test6");
+        queue.enqueue("Test7");
+        assertEquals("Test3 Test4 Test5 Test6 Test7", queue.toString());
+    }
 }
