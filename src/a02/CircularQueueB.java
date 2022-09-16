@@ -23,9 +23,6 @@ public class CircularQueueB<Item> implements Iterable<Item> {
 
         private Node next; //links to the next node
 
-        public Node getNext(){return next;}
-        public Item getItem(){return item;}
-
         Node(Item item){ this.item = item;}
     }
 
@@ -34,7 +31,10 @@ public class CircularQueueB<Item> implements Iterable<Item> {
      * Inspired by NumberStack CE
      * @param capacity how much this queue can hold.
      */
-    CircularQueueB(int capacity){this.capacity= capacity;}
+    CircularQueueB(int capacity){
+        if(capacity <= 0){throw new IllegalArgumentException("Capacity must be greater than 0");}
+        this.capacity= capacity;
+    }
 
     /**
      * @return if the linked list queue is full
@@ -58,7 +58,8 @@ public class CircularQueueB<Item> implements Iterable<Item> {
      */
     public void enqueue(Item item){
         Node newNode = new Node(item);
-        if(isFull()){capacity++;}
+        //Dynamically expands the capacity if the queue is full
+        if(isFull()){throw new UnsupportedOperationException("cannot add a element to a full queue.");}
         if (isEmpty()) {
             front = newNode;
             rear = newNode;
@@ -66,15 +67,13 @@ public class CircularQueueB<Item> implements Iterable<Item> {
             rear.next = front;
         }
         else{
-            //connects the previous rear to the new rear with a next ->
+            //First, connects the previous rear to the new rear with a next ->
             rear.next = newNode;
-            //Circularly connects new node (rear) back to the front with a next ->
+            //Next, circularly connects new node (rear) back to the front with a next ->
             newNode.next = front;
-            //finally establishes the new node as the rear of the queue.
+            //Finally, establishes the new node as the rear of the queue.
             rear = newNode;
         }
-        //dynamically resizes the capacity
-
         size++;
     }
 
@@ -83,14 +82,12 @@ public class CircularQueueB<Item> implements Iterable<Item> {
      * @return item removed from the front of the queue
      */
     public Item dequeue(){
-        //TODO
         if (isEmpty()){
             throw new NoSuchElementException("Can't remove an element from an empty queue.");
         }
         Node topNode = front;
         front = front.next;
         size--;
-        if(!isFull()){capacity--;}
         return topNode.item;}
 
     public Item peek(){
@@ -115,19 +112,6 @@ public class CircularQueueB<Item> implements Iterable<Item> {
 
         return builtString.toString();
     }
-    /*
-    public String toStringNodeInfo(){
-
-        StringBuilder builtString = new StringBuilder();
-
-        for (Item el : this) {
-            builtString.append(el).append(" ");
-        }
-
-        return builtString.toString();
-    }
-     */
-
 
     @Override
     public Iterator<Item> iterator() {
@@ -151,10 +135,12 @@ public class CircularQueueB<Item> implements Iterable<Item> {
             return nextItem;
         }
     }
-    /*
+
     //= = = TEST CLIENT = = =//
     public static void main(String[] args){
+        /*
         CircularQueueB<String> numberQueue = new CircularQueueB<>(3);
+        System.out.println("Current size of nodes: " + numberQueue.size + "\n");
         System.out.println("Adding 1 to circular queue... \n");
         numberQueue.enqueue("1");
         System.out.println("Q: is numberQueue full? A: " + numberQueue.isFull() + "\n");
@@ -162,24 +148,21 @@ public class CircularQueueB<Item> implements Iterable<Item> {
         System.out.println("Called numberQueue.dequeue();"+ "\n");
         numberQueue.dequeue();
         System.out.println("Q: is numberQueue empty? A: " + numberQueue.isEmpty() + "\n");
-        System.out.println("Calling enqueue more than capacity"
+        System.out.println("Current size of nodes: " + numberQueue.size + "\n");
+        System.out.println("Calling enqueue size of capacity \n"
                + "Called numberQueue.enqueue(''1'');\n"
                + "Called numberQueue.enqueue(''2'');\n"
                + "Called numberQueue.enqueue(''3'');\n"
-               + "Called numberQueue.enqueue(''4'');\n"
         );
         numberQueue.enqueue("1");
         numberQueue.enqueue("2");
         numberQueue.enqueue("3");
-        numberQueue.enqueue("4");
         System.out.println("Current values of nodes: " + numberQueue + "\n");
         System.out.println("Q: is numberQueue full? A: " + numberQueue.isFull() + "\n");
         System.out.println("Called numberQueue.dequeue(); Dequeue value: " + numberQueue.dequeue() + "\n");
         System.out.println("Current values of nodes: " + numberQueue + "\n");
         System.out.println("Current size of nodes: " + numberQueue.size + "\n");
         System.out.println("Current capacity of nodes: " + numberQueue.capacity + "\n");
+         */
     }
-     */
 }
-
-
