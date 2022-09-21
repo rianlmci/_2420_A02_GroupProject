@@ -10,21 +10,21 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * @author Eric R unless otherwise stated.
  */
-class CircularQueueATest {
-    private CircularQueueA<String> stringQueue = new CircularQueueA<>(5);
-    private CircularQueueA<String> emptyQueue = new CircularQueueA<>(3);
-    private CircularQueueA<String> oneElement = new CircularQueueA<>(5);
+class CircularQueueBTest {
+    private CircularQueueB<String> stringQueue = new CircularQueueB<>(5);
+    private CircularQueueB<String> emptyQueue = new CircularQueueB<>(3);
+    private CircularQueueB<String> oneElement = new CircularQueueB<>(5);
 
 
     @BeforeEach
     void setUp() {
-        stringQueue = new CircularQueueA<>(5);
-        emptyQueue = new CircularQueueA<>(3);
-        oneElement = new CircularQueueA<>(5);
+        stringQueue = new CircularQueueB<>(5);
+        emptyQueue = new CircularQueueB<>(3);
+        oneElement = new CircularQueueB<>(5);
         stringQueue.enqueue("this");
         stringQueue.enqueue("is");
         stringQueue.enqueue("queue");
-        stringQueue.enqueue("a's");
+        stringQueue.enqueue("b's");
         stringQueue.enqueue("test");
         oneElement.enqueue("Test");
     }
@@ -68,6 +68,7 @@ class CircularQueueATest {
         emptyQueue.enqueue("Test2");
         assertEquals("Test0 Test1 Test2 ", emptyQueue.toString());
     }
+    /*
     @Test
     void enqueue_moreThenMax() {
         emptyQueue.enqueue("Test0");
@@ -75,6 +76,7 @@ class CircularQueueATest {
         emptyQueue.enqueue("Test2");
         assertThrows(UnsupportedOperationException.class, () -> emptyQueue.enqueue("Test3"));
     }
+     */
 
     @Test
     void dequeue_1Element() {
@@ -85,7 +87,7 @@ class CircularQueueATest {
         assertEquals("this",stringQueue.dequeue());
         assertEquals("is",stringQueue.dequeue());
         assertEquals("queue",stringQueue.dequeue());
-        assertEquals("a's",stringQueue.dequeue());
+        assertEquals("b's",stringQueue.dequeue());
         assertEquals("test",stringQueue.dequeue());
     }
     @Test
@@ -134,23 +136,7 @@ class CircularQueueATest {
 
     @Test
     void testToString_FullQueue() {
-        assertEquals("this is queue a's test ", stringQueue.toString());
+        assertEquals("this is queue b's test ", stringQueue.toString());
     }
 
-    @Test
-    void testToString_enqueueAndDequeue() {
-        CircularQueueA<String> queue = new CircularQueueA<>(5);
-        queue.enqueue("Test0");
-        queue.enqueue("Test1");
-        queue.enqueue("Test2");
-        queue.enqueue("Test3");
-        queue.enqueue("Test4");
-        queue.dequeue();
-        queue.dequeue();
-        queue.dequeue();
-        queue.enqueue("Test5");
-        queue.enqueue("Test6");
-        queue.enqueue("Test7");
-        assertEquals("Test3 Test4 Test5 Test6 Test7", queue.toString());
-    }
 }

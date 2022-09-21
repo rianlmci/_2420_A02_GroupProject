@@ -86,18 +86,20 @@ public class CircularQueueA<Item> implements Iterable<Item> {
         return new CircularQueueIterator();
     }
     private class CircularQueueIterator implements Iterator<Item> {
-        int currentRear = rear;
-        int currentFront = front - 1;
+        int currentFront = front;
+        int i;
 
         @Override
         public boolean hasNext() {
-            return currentFront != currentRear && currentFront != -2;
+            return i < size();
         }
 
         @Override
         public Item next() {
+            Item item = items[currentFront];
             currentFront = (currentFront + 1) % capacity;
-            return items[currentFront];
+            i++;
+            return item;
         }
     }
 }
