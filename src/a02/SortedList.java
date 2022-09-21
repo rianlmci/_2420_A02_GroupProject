@@ -13,13 +13,25 @@ import java.util.NoSuchElementException;
  * @param <Item> type of elements stored in the sorted list
  */
 public class SortedList<Item extends Comparable<Item>> {
-	// TODO - add fields as needed
+	//front of the list
+	private Node front;
+	//back of the list
+	private Node rear;
+	//how much the list is currently holding
+	private int size;
 	
 	/**
 	 * Represents a node in a double linked list.
-	 * / 
+	 */
 	private class Node {
-		// TODO		
+		private Item item;
+
+		private Node next; //links to the next node
+
+		private Node previous; //links to the previous Node
+
+		Node(Item item){ this.item = item;}
+
 	}
 	
 	/**
@@ -27,18 +39,14 @@ public class SortedList<Item extends Comparable<Item>> {
 	 * 
 	 * @return true if there are no elements in the list and false otherwise
 	 */
-	public boolean isEmpty() {
-		return false; // TODO
-	}
+	public boolean isEmpty() {return size() == 0;}
 	
 	/**
 	 * Determines how many elements are in the list.
 	 * 
 	 * @return number of elements in the list
 	 */
-	public int size() {
-		return 0; // TODO
-	}
+	public int size(){return this.size;}
 
 	/**
 	 * Adds <code>item</code> to the list while maintaining the list's sorted order.
@@ -47,7 +55,17 @@ public class SortedList<Item extends Comparable<Item>> {
 	 * @throws NullPointerException if the specified element is null
 	 */
 	public void insert(Item item) {
-		// TODO
+		Node current = front;
+		Node next;
+		Node previous = null;
+		while(!(current != null && current.next.item.compareTo(item) >= 0)){
+			previous = current;
+			current = current.next;
+		}
+		Node nodeToInsert = new Node(item);
+		nodeToInsert.previous = previous;
+		nodeToInsert.next = current;
+
 	}
 
 	/**
@@ -72,7 +90,7 @@ public class SortedList<Item extends Comparable<Item>> {
 	 * a) updating index 2 with 33 results in 10-20-33-40-50 <br/>
 	 * b) updating index 3 with 15 results in 10-15-20-30-50 <br/>
 	 * c) updating index 1 with 60 results in 10-30-40-50-60 <br/>
-	 * 
+	 * @author Rianna //TODO
 	 * @param index position of the element that needs to be updated
 	 * @param item new value of the updated element
 	 * @throws IndexOutOfBoundsException if the specified index is not in the range [0, n)
@@ -88,7 +106,7 @@ public class SortedList<Item extends Comparable<Item>> {
 	 * Builds a string that includes all the list elements in order. 
 	 * Each element is followed by a single space.
 	 * If this list is empty, and empty string is returned.
-	 * 
+	 * @author Rianna //TODO
 	 * @return a string representation of the sorted list
 	 */
 	@Override
