@@ -55,17 +55,33 @@ public class SortedList<Item extends Comparable<Item>> {
 	 * @throws NullPointerException if the specified element is null
 	 */
 	public void insert(Item item) {
-		Node current = front;
-		Node next;
-		Node previous = null;
-		while(!(current != null && current.next.item.compareTo(item) >= 0)){
-			previous = current;
-			current = current.next;
+		if (item == null){
+			throw new NullPointerException("Item to insert can not be null.");
 		}
 		Node nodeToInsert = new Node(item);
-		nodeToInsert.previous = previous;
-		nodeToInsert.next = current;
+		Node current = front;
 
+		if (size() == 0){
+			front = nodeToInsert;
+			rear = nodeToInsert;
+			size++;
+			return;
+		}
+
+		while(current.next != null && current.next.item.compareTo(item) <= 0){
+			current = current.next;
+		}
+
+		nodeToInsert.next = current.next;
+		current.next = nodeToInsert;
+		nodeToInsert.previous = current;
+
+		if (nodeToInsert.next != null){
+			nodeToInsert.next.previous = nodeToInsert;
+		} else {
+			rear = nodeToInsert;
+		}
+		size++;
 	}
 
 	/**
@@ -78,7 +94,16 @@ public class SortedList<Item extends Comparable<Item>> {
 	 * @throws IndexOutOfBoundsException if the specified index is not in the range [0, n)
 	 */
 	public Item delete(int index) {
-		return null; // TODO
+		Node current = front;
+
+		for (int i = 0; i < index; i++) {
+			current = current.next;
+		}
+		Item currentItem = current.item;
+		//links
+		current.previous.next = current.next;
+		current.next.previous = current.previous;
+		return currentItem;
 	}
 	
 	/**
@@ -117,7 +142,14 @@ public class SortedList<Item extends Comparable<Item>> {
 	// = = = Optional Test Client = = =
 	
 	public static void main(String[] args) {
-		
+		SortedList<String> strings = new SortedList<>();
+		strings.insert("String");
+		strings.insert("String1");
+		strings.insert("String2");
+		strings.insert("String3");
+		strings.insert("String4");
+		strings.insert("String2");
+		strings.delete(3);
 	}
 
 }
