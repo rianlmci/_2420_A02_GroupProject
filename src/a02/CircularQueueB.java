@@ -23,7 +23,7 @@ public class CircularQueueB<Item> implements Iterable<Item> {
 
         private Node next; //links to the next node
 
-        Node(Item item){ this.item = item;}
+        Node(Item item){this.item = item;}
     }
 
     /**
@@ -58,7 +58,6 @@ public class CircularQueueB<Item> implements Iterable<Item> {
      */
     public void enqueue(Item item){
         Node newNode = new Node(item);
-        //Dynamically expands the capacity if the queue is full
         if(isFull()){throw new UnsupportedOperationException("cannot add a element to a full queue.");}
         if (isEmpty()) {
             front = newNode;
