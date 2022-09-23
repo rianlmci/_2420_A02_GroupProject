@@ -3,12 +3,24 @@ package a02;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * A collection that hold elements in a FIFO queue data structure.
+ *
+ * @param <Item> the type parameter
+ */
 public class CircularQueueA<Item> implements Iterable<Item> {
     private int capacity;
     private int front, rear;
     private Item[] items;
     private int size;
 
+    /**
+     * Instantiates a new Circular queue.
+     * Capacity of the queue must be positive.
+     *
+     *
+     * @param capacity the capacity of the queue.
+     */
     CircularQueueA(int capacity) {
         if (capacity < 1)
             throw new IllegalArgumentException("Capacity must be at least 1.");
@@ -18,7 +30,12 @@ public class CircularQueueA<Item> implements Iterable<Item> {
         items = (Item[]) new Object[capacity];
     }
 
-    // Check if the queue is full
+    /**
+     * Returns true if the queue is full.
+     *
+     * @return true if the queue is full.
+     */
+// Check if the queue is full
     public boolean isFull() {
         if (front == 0 && rear == capacity - 1) {
             return true;
@@ -26,12 +43,22 @@ public class CircularQueueA<Item> implements Iterable<Item> {
         return front == rear + 1;
     }
 
-    // Check if the queue is empty
+    /**
+     * Returns true if the queue is empty.
+     *
+     * @return true if the queue is empty.
+     */
+// Check if the queue is empty
     public boolean isEmpty() {
         return front == -1;
     }
 
-    // Adding an element
+    /**
+     * adds an element to the start of the queue.
+     *
+     * @param element the element
+     * @throws UnsupportedOperationException if the queue is full
+     */
     public void enqueue(Item element) {
         if (isFull())
             throw new UnsupportedOperationException("cannot add a element to a full queue.");
@@ -43,7 +70,13 @@ public class CircularQueueA<Item> implements Iterable<Item> {
         size++;
     }
 
-    // Removing an element
+    /**
+     * Removes an element from the end of the queue
+     * Returns the element that was removed.
+     *
+     * @return the item that was removed.
+     * @throws NoSuchElementException if the queue is empty
+     */
     public Item dequeue() {
         Item element;
         if (isEmpty())
@@ -62,12 +95,22 @@ public class CircularQueueA<Item> implements Iterable<Item> {
 
     }
 
+    /**
+     * Returns the next element to be removed.
+     *
+     * @return the next element to be removed.
+     */
     public Item peek() {
         if (isEmpty())
             throw new NoSuchElementException("Cannot peek an empty array");
         return items[front];
     }
 
+    /**
+     * Returns the size of the array.
+     *
+     * @return the size of the array.
+     */
     public int size(){
         return size;
     }
