@@ -16,10 +16,8 @@ public class CircularQueueA<Item> implements Iterable<Item> {
 
     /**
      * Instantiates a new Circular queue.
-     * Capacity of the queue must be positive.
-     *
-     *
      * @param capacity the capacity of the queue.
+     * @throws IllegalArgumentException if the queue capacity is < 0.
      */
     CircularQueueA(int capacity) {
         if (capacity < 1)
@@ -31,8 +29,6 @@ public class CircularQueueA<Item> implements Iterable<Item> {
     }
 
     /**
-     * Returns true if the queue is full.
-     *
      * @return true if the queue is full.
      */
 // Check if the queue is full
@@ -44,8 +40,6 @@ public class CircularQueueA<Item> implements Iterable<Item> {
     }
 
     /**
-     * Returns true if the queue is empty.
-     *
      * @return true if the queue is empty.
      */
 // Check if the queue is empty
@@ -56,7 +50,7 @@ public class CircularQueueA<Item> implements Iterable<Item> {
     /**
      * adds an element to the start of the queue.
      *
-     * @param element the element
+     * @param element the element to be added
      * @throws UnsupportedOperationException if the queue is full
      */
     public void enqueue(Item element) {
@@ -72,10 +66,8 @@ public class CircularQueueA<Item> implements Iterable<Item> {
 
     /**
      * Removes an element from the end of the queue
-     * Returns the element that was removed.
-     *
      * @return the item that was removed.
-     * @throws NoSuchElementException if the queue is empty
+     * @throws NoSuchElementException if the queue is empty.
      */
     public Item dequeue() {
         Item element;
@@ -96,9 +88,8 @@ public class CircularQueueA<Item> implements Iterable<Item> {
     }
 
     /**
-     * Returns the next element to be removed.
-     *
      * @return the next element to be removed.
+     * @throws NoSuchElementException if queue is empty.
      */
     public Item peek() {
         if (isEmpty())
@@ -107,8 +98,6 @@ public class CircularQueueA<Item> implements Iterable<Item> {
     }
 
     /**
-     * Returns the size of the array.
-     *
      * @return the size of the array.
      */
     public int size(){
