@@ -4,8 +4,9 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * @author Rianna M unless otherwise stated
- * @param <Item>
+ * Circular queue implementation using a linked list.
+ * @author Rianna M unless otherwise stated.
+ * @param <Item> type of elements stored in the circular queue.
  */
 public class CircularQueueB<Item> implements Iterable<Item> {
     //how much the queue can hold
@@ -30,6 +31,7 @@ public class CircularQueueB<Item> implements Iterable<Item> {
      * Constructor for LinkedList CircularQueue
      * Inspired by NumberStack CE
      * @param capacity how much this queue can hold.
+     * @throws IllegalArgumentException if capacity given is less than or equal to 0.
      */
     CircularQueueB(int capacity){
         if(capacity <= 0){throw new IllegalArgumentException("Capacity must be greater than 0");}
@@ -37,12 +39,12 @@ public class CircularQueueB<Item> implements Iterable<Item> {
     }
 
     /**
-     * @return if the linked list queue is full
+     * @return if the linked list queue is full.
      */
     public boolean isFull(){return size == capacity;}
 
     /**
-     * @return if the linked list queue is empty
+     * @return if the linked list queue is empty.
      */
     public boolean isEmpty(){return size == 0;}
 
@@ -55,6 +57,7 @@ public class CircularQueueB<Item> implements Iterable<Item> {
      * Adds an item to the front of the list.
      * Inspired by CE Wordlist.prepend()
      * @param item we are adding to the queue
+     * @throws UnsupportedOperationException if method is called on a full queue.
      */
     public void enqueue(Item item){
         Node newNode = new Node(item);
@@ -77,8 +80,7 @@ public class CircularQueueB<Item> implements Iterable<Item> {
     }
 
     /**
-     *
-     * @return item removed from the front of the queue
+     * @return item removed from the front of the queue.
      */
     public Item dequeue(){
         if (isEmpty()){
@@ -89,6 +91,10 @@ public class CircularQueueB<Item> implements Iterable<Item> {
         size--;
         return topNode.item;}
 
+    /**
+     * @return item from the front element in the queue.
+     * @throws NoSuchElementException if queue is empty.
+     */
     public Item peek(){
         if (isEmpty()){
             throw new NoSuchElementException("Can't read front element from an empty queue.");
@@ -97,7 +103,6 @@ public class CircularQueueB<Item> implements Iterable<Item> {
     }
 
     /**
-     *
      * @return String format of the queue.
      */
     @Override

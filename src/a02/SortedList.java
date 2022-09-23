@@ -8,9 +8,9 @@ import java.util.NoSuchElementException;
  * The elements are internally stored in a doubly-linked list, and 
  * null elements are not allowed.
  * 
- * @author CSIS Starter Code + ..... (Eric R and Rianna M.)
+ * @author CSIS Starter Code + ..... (Eric R. and Rianna M.)
  *  
- * @param <Item> type of elements stored in the sorted list
+ * @param <Item> type of elements stored in the sorted list.
  */
 public class SortedList<Item extends Comparable<Item>> {
 	//front of the list
